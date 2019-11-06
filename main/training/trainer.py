@@ -23,7 +23,7 @@ if __name__ == "__main__":
     x_pipeline = Pipeline([
         ("scaling", StandardScaler()),
     ])
-    x = x_pipeline.fit_transform(x)
+    x_fit = x_pipeline.fit_transform(x)
 
     y_pipeline = Pipeline([
         ("labeler", OrdinalEncoder()),
@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     # Fit the pipeline
     model = LogisticRegression(solver="lbfgs")
-    model.fit(x, y_fit)
+    model.fit(x_fit, y_fit)
 
     # Create a fully integrated pipeline
     prediction_pipeline = Pipeline([
