@@ -1,2 +1,5 @@
 .DS_Store
 .idea
+pipeline
+venv
+__pycache__
