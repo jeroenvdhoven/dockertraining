@@ -11,9 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy all server and pipeline files
 COPY . .
 
-# Set Flask configuration
-ENV FLASK_APP server.py
-ENV host 0.0.0.0
+# Set gunicorn configuration
+ENV FLASK_APP=server.py host=0.0.0.0
 EXPOSE 5000
 
 CMD [ "bash", "./gunicorn_start.sh"]
