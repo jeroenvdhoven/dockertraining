@@ -51,9 +51,5 @@ if __name__ == "__main__":
     print(confusion_matrix(y, preds))
 
     # Save models
-    try:
-        os.mkdir(output_folder)
-    except FileExistsError:
-        pass
-
+    os.makedirs(output_folder, exist_ok=True)
     dump(prediction_pipeline, os.path.join(output_folder, model_file))
