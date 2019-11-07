@@ -1,7 +1,8 @@
-from flask import Flask
-import joblib
 import os
+
+import joblib
 import pandas as pd
+from flask import Flask
 
 from main import output_folder, model_file
 

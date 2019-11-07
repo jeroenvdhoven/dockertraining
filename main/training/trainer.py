@@ -1,11 +1,11 @@
-import pandas as pd
-from sklearn.preprocessing import StandardScaler, OrdinalEncoder, FunctionTransformer
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
-from sklearn.metrics import confusion_matrix
-
 import os
+
+import pandas as pd
 from joblib import dump
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OrdinalEncoder, FunctionTransformer
 
 from main import output_folder, model_file
 from main.training.model_functions import call_model, reverse_labels

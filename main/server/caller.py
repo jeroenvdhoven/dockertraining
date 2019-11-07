@@ -1,6 +1,7 @@
+import argparse
+
 import pandas as pd
 import requests
-import argparse
 
 # Parse the command line arguments
 parser = argparse.ArgumentParser()
