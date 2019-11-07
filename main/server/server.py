@@ -17,11 +17,13 @@ if not os.path.isfile(target_file):
 pipeline = joblib.load(target_file)
 
 
+# Make and endpoint that accepts one variable `data` as input
 @app.route('/<string:data>')
 def predict(data: str):
     converted_data = pd.read_json(data)
     return str(pipeline.transform(converted_data))
 
 
+# Run the app only if this file is run.
 if __name__ == "__main__":
     app.run()
