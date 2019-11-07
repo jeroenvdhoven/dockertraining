@@ -12,4 +12,5 @@ COPY . .
 ENV FLASK_APP=server.py host=0.0.0.0
 EXPOSE 5000
 
-CMD [ "bash", "./flask_start.sh"]
+ENTRYPOINT ["bash"]
+CMD ["./flask_start.sh"]
