@@ -64,11 +64,10 @@ a DataFrame if possible, while `DataFrame.to_json()` will do the opposite. You c
 to send data to Flask. You can check https://flask.palletsprojects.com/en/1.1.x/quickstart/#variable-rules
 to see how Flask can accept incoming variables and hand them to your functions.
 
+Finally, use `flask run --host 127.0.0.1` from inside the `main/server` folder to start your server.
+You can use the `caller.py` file to test your API.
 
-    1. Flask
-    2. Teach about REST
-    3. Make a Flask server to host your model
-    4. Run it locally to test it
+
 4. Transfer to docker image
     1. Run:
         1. docker pull python:3.7
