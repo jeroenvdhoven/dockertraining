@@ -65,27 +65,76 @@ to send data to Flask. You can check https://flask.palletsprojects.com/en/1.1.x/
 to see how Flask can accept incoming variables and hand them to your functions.
 
 Finally, use `flask run --host 127.0.0.1` from inside the `main/server` folder to start your server.
-You can use the `caller.py` file to test your API.
+You can use the `caller.py` file to test your API. I'd recommend making a small bash script that
+starts the server for you. This will come in handy later as well.
 
+## Transfer to docker image
+Docker is a platform to make lightweight, standalone applications (containers / images). These run on the 
+OS of the machine Docker runs on, but can have their own versions of programs installed.
+This means that docker containers can easily be transported between servers, since the correct
+version of used tools and libraries are bundled in the container. This makes it easier
+to scale and port applications. 
+ 
+As data scientists we can use containers for instance as a dedicated python container,
+ a Unix container on Windows machines (though this is basically a VM, not a container),
+ or for deploying machine learning models & pipelines.
 
-4. Transfer to docker image
-    1. Run:
-        1. docker pull python:3.7
-        2. docker pull python:3.7-slim-buster
-    2. Best practices
-    3. Create requirements.txt
-    4. Creating a Dockerfile
-        1. Starting from the right base image
-        2. Install right python environment
-        3. Copy the required files
-        4. Launch API on starting image
-        5. Think of how you can increase your build speed!
-5. Run docker image locally
-    1. Try it, test it!
-6. Run docker image on remote machine
+For this part you might want to take a look at https://docs.docker.com/engine/reference/commandline/cli/.
+Especially look at the following `docker ...` commands:
+- images
+- build
+- run
+- ps
+- stop
+- rm
+- rmi
+
+In this section we will work mainly with Dockerfiles (https://docs.docker.com/engine/reference/builder/).
+Dockerfiles are effectively scripts for making new Docker containers from existing containers.
+They provide reproducible ways of making Docker containers, making them very useful for
+deployment purposes. We will make a Flask container to serve your model. Make sure you read the
+page on Dockerfiles above before continuing.
+
+As a base image you can use one of the `python:3.7` containers. Make sure your Dockerfile
+installs the right python packages on the container, as well as copying your Flask code and model.
+Finally, it should open the right ports on the container and start the Flask server. You
+can build your image using the `docker build` command.
+
+Note: Docker caches builds at each line of execution. If you build a previously build image,
+it will try to use the cache as much as possible until it finds a new command or it has
+to use a new version of a file you created. All stages afterwards will be rerun. This is
+especially relevant when it comes to installing libraries, since this takes a while. It can
+be very useful to install your libraries early on in your Dockerfile to speed up development. 
+
+Note 2: Your container operates basically behind its own firewall. The default Flask address of 
+`127.0.0.1` is not available to your machine this way. Set the host of Flask to `0.0.0.0` to
+make sure you can call it from your machine. This makes it accessible to the outside, so make sure you do not
+run the Flask server like this on your own machine (since 'outside' will mean the internet).
+
+Once you have that up and running, you can try it out! Run you container using `docker run`
+and check if you can call your model using `caller.py`. Don't forget the `-p` flag when using `run`
+Once you got your first call working, try to think of how you can make your container smaller
+(run `docker images`) and faster to build. Check for instance the container sizes of
+`docker pull python:3.7` and `docker pull python:3.7-slim-buster`
+
+## Now using a WSGI server
+You may have noticed the warning printed by Flask:
+```
+WARNING: This is a development server. Do not use it in a production deployment.
+Use a production WSGI server instead.
+```
+Basically, the default server Flask provides is simple and works, but can't handle a production
+situation well. For more details, see https://flask.palletsprojects.com/en/1.1.x/deploying/#deployment
+Webserver frameworks implementing the WSGI standard will be better options for hosting
+production loads than the development server provided by Flask. Here we will use one of
+those servers to host our Flask application. We will use `gunicorn`. Why? It was at the 
+top of the list in the Deployment - Standalone Services section. Perfect reason, right?
+
+Gunicorn is a python package, so you can look up the documentation (https://gunicorn.org/) as well as
+look at the example in https://flask.palletsprojects.com/en/1.1.x/deploying/wsgi-standalone/
+to figure out how to change your Dockerfile for the Flask server to fit a Gunicorn hosted
+app. Once you have build your container, test it again using the `caller.py` script.
+
+## Run docker image on remote machine
     1. Start AWS machine
     2. Try it, test it!
-7. Now, do it properly with a WSGI machine
-    1. Why use that type of machine?
-    2. Which to use?
-    3. Set it up in Docker
