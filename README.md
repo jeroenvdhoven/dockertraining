@@ -88,6 +88,8 @@ Especially look at the following `docker ...` commands:
 - stop
 - rm
 - rmi
+- save
+- load
 
 In this section we will work mainly with Dockerfiles (https://docs.docker.com/engine/reference/builder/).
 Dockerfiles are effectively scripts for making new Docker containers from existing containers.
@@ -136,5 +138,12 @@ to figure out how to change your Dockerfile for the Flask server to fit a Gunico
 app. Once you have build your container, test it again using the `caller.py` script.
 
 ## Run docker image on remote machine
-    1. Start AWS machine
-    2. Try it, test it!
+Now, to actually put the container in production! Start a t2-medium server on AWS and make
+sure you have SSH access (set the security group). Save your docker container using
+`docker save` and copy it to your machine. `scp` should do the trick here.
+
+SSH into your created machine, install docker using `sudo yum install -y docker`, and start the
+service using `sudo service docker start`. Load your image using `docker load`, and finally
+start your image using `docker run`. Don't forget to set the `-p` option and to make sure
+the firewall allows you to access the machine at port `5000`. Then test it with the `caller.py`
+script (make sure you set the correct URL).
