@@ -4,9 +4,9 @@
     2. Train a model
     3. Turn your model into a REST api using Flask
     4. Transfer to docker image
-    5. Run docker image on remote machine
-    6. Running Flask using a WSGI service
-
+    5. Run Flask using a WSGI server
+    6. Run docker image on remote machine
+    
 At any moment can you check out the `solutions` branch to see how you can solve the problem at hand.
 `git stash` and `git stash pop` can be useful to store your work in-between switching to and from the `solutions` branch
 
@@ -119,7 +119,7 @@ Once you got your first call working, try to think of how you can make your cont
 (run `docker images`) and faster to build. Check for instance the container sizes of
 `docker pull python:3.7` and `docker pull python:3.7-slim-buster`
 
-## Now using a WSGI server
+## Run Flask using a WSGI server
 You may have noticed the warning printed by Flask:
 ```
 WARNING: This is a development server. Do not use it in a production deployment.
