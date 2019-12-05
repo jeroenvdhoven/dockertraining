@@ -12,7 +12,7 @@ from main.training.model_functions import call_model, reverse_labels
 
 if __name__ == "__main__":
     # Read data
-    data = pd.read_csv("iris.csv")
+    data = pd.read_csv(os.path.join("main", "training", "iris.csv"))
     data = data[data["Species"].isin(["setosa", "virginica"])]
 
     # Split into x and y
