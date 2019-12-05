@@ -2,7 +2,7 @@
 
     1. Setup
     2. Train a model
-    3. Turn your model into a REST api using Flask
+    3. Turn your model into an API using Flask
     4. Transfer to docker image
     5. Run Flask using a WSGI server
     6. Run docker image on remote machine
@@ -28,9 +28,10 @@ this training.
 
 The provided `main/training` folder contains all the files you need to train the full prediction
 pipeline used in this training. Inspect the file so you understand what it doen. Run `trainer.py` and make sure there's a file in 
-`main/server/static` called `pipeline`. 
+`main/server/static` called `pipeline`. Alternaltively, you can run the `train.sh` script from the top directory of 
+this project.
 
-## Turn your model into a REST api using Flask
+## Turn your model into an API using Flask
 Flask is a tool that allows you to make python backends. It can thus also be used to host machine learning models.
 For a good intro how Flask works, check https://flask.palletsprojects.com/en/1.1.x/quickstart/.
 
@@ -138,7 +139,7 @@ to figure out how to change your Dockerfile for the Flask server to fit a Gunico
 app. Once you have build your container, test it again using the `caller.py` script.
 
 ## Run docker image on remote machine
-Now, to actually put the container in production! Start a t2-medium server on AWS and make
+Now, to actually put the container in production! Start a t2-medium server on AWS (use the amazon linux image) and make
 sure you have SSH access (set the security group). Save your docker container using
 `docker save` and copy it to your machine. `scp` should do the trick here.
 
