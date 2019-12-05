@@ -12,7 +12,7 @@ app = Flask(__name__)
 # Read the pipeline
 target_file = os.path.join(output_folder, model_file)
 if not os.path.isfile(target_file):
-    target_file = os.path.join("main", "server", "static", model_file)
+    target_file = os.path.join("static", model_file)
 
 pipeline = joblib.load(target_file)
 

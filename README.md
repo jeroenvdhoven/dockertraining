@@ -42,7 +42,7 @@ should be able to access it.
 
 Use the example provided in the link above as a starting template. 
 When you are done, you can use the `flask run` command inside the `main/server` folder to
-start the server as follows. Try this out with the example first to see if it works.
+start the server as follows. Try this out with the example found at the flask website first to see if it works.
 ```
 export FLASK_APP=server.py
 flask run --host 127.0.0.1
