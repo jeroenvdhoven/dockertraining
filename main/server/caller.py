@@ -13,7 +13,7 @@ args = parser.parse_args()
 base_url = f"{args.address}:{args.port}"
 
 # Read a few records from the dataset
-dataset = pd.read_csv("../training/iris.csv")
+dataset = pd.read_csv("main/training/iris.csv")
 text = dataset.drop("Species", axis=1).iloc[:2].to_json()
 
 # Call the API
