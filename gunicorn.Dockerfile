@@ -15,5 +15,4 @@ COPY . .
 ENV FLASK_APP=server.py host=0.0.0.0
 EXPOSE 5000
 
-ENTRYPOINT ["bash"]
 CMD ["./gunicorn_start.sh"]
