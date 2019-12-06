@@ -114,6 +114,10 @@ Note 2: Your container operates basically behind its own firewall. The default F
 make sure you can call it from your machine. This makes it accessible to the outside, so make sure you do not
 run the Flask server like this on your own machine (since 'outside' will mean the internet).
 
+Note 3: Take a look at `.dockerignore`. The `venv` folder is listed there. Anything listed in that file will not be
+send to the Docker build context. This can make your build commands run considerably faster, as well as prevent you
+from creating Docker images that are too large (by accident).
+
 Once you have that up and running, you can try it out! Run you container using `docker run`
 and check if you can call your model using `caller.py`. Don't forget the `-p` flag when using `run`
 Once you got your first call working, try to think of how you can make your container smaller
