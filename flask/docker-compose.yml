@@ -6,3 +6,4 @@ services:
     build:
       context: ..
       dockerfile: flask/Dockerfile
+    image: flask-training:latest

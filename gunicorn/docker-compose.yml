@@ -6,3 +6,4 @@ services:
     build:
       context: ..
       dockerfile: gunicorn/Dockerfile
+    image: gunicorn-training:latest
