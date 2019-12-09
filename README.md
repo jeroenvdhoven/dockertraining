@@ -5,7 +5,8 @@
     3. Turn your model into an API using Flask
     4. Transfer to docker image
     5. Run Flask using a WSGI server
-    6. Run docker image on remote machine
+    6. Create a docker-compose.yml configuration 
+    7. Run docker image on remote machine
     
 At any moment can you check out the `solutions` branch to see how you can solve the problem at hand.
 `git stash` and `git stash pop` can be useful to store your work in-between switching to and from the `solutions` branch
@@ -142,6 +143,29 @@ look at the example in https://flask.palletsprojects.com/en/1.1.x/deploying/wsgi
 to figure out how to change your Dockerfile for the Flask server to fit a Gunicorn hosted
 app. Once you have build your container, test it again using the `caller.py` script.
 
+## Create a docker-compose.yml configuration
+Now you've build up some experience with the `docker` command, you may have noticed that it becomes annoying to save
+the exact command you're using to build images and start / stop containers. You may have already created a small bash
+script to simplify this process. However, there is another way: `docker-compose`.
+
+Docker-compose allows you to specify how multiple images together form one application. For instance, you can define
+a webserver image and a database image in one configuration so these can easily interface with each other. Furthermore,
+it greatly simplifies your building and deployment cycle. We only have 1 image in our application, but it can still help
+simplify our workflow. Take a look at the following commands in the documentation (https://docs.docker.com/compose/):
+
+- up: build (if needed) and start a service using a `docker-compose.yml` file
+- down: shut down and remove a service using a `docker-compose.yml` file 
+
+Try to create your own `docker-compose.yml` file for your gunicorn server. Make sure you:
+ 
+- open the right ports
+- set the right build context
+- reference the right dockerfile
+- Include the `image` option to name your image
+
+It is worth noting that `docker-compose up` and `docker-compose down` only work from the same directory where 
+`docker-compose.yml` is located.
+
 ## Run docker image on remote machine
 Now, to actually put the container in production! Start a t2-medium server on AWS (use the amazon linux image) and make
 sure you have SSH access (set the security group). Save your docker container using
@@ -152,3 +176,5 @@ service using `sudo service docker start`. Load your image using `docker load`, 
 start your image using `docker run`. Don't forget to set the `-p` option and to make sure
 the firewall allows you to access the machine at port `5000`. Then test it with the `caller.py`
 script (make sure you set the correct URL).
+
+At this moment I'm still working on a way to deploy using `docker-compose.yml`
