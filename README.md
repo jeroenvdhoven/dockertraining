@@ -67,7 +67,7 @@ to send data to Flask. You can check https://flask.palletsprojects.com/en/1.1.x/
 to see how Flask can accept incoming variables and hand them to your functions.
 
 Finally, use `flask run --host 127.0.0.1` from inside the `main/server` folder to start your server.
-You can use the `caller.py` file to test your API. I'd recommend making a small bash script that
+You can use the `caller.py` or `call.sh` file to test your API. I'd recommend making a small bash script that
 starts the server for you. This will come in handy later as well.
 
 ## Transfer to docker image
@@ -177,4 +177,4 @@ start your image using `docker run`. Don't forget to set the `-p` option and to 
 the firewall allows you to access the machine at port `5000`. Then test it with the `caller.py`
 script (make sure you set the correct URL).
 
-At this moment I'm still working on a way to deploy using `docker-compose.yml`
+Deploying using `docker-compose` is only possible if you push the images to a Docker registry.
