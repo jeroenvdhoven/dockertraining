@@ -1,5 +1,5 @@
 .DS_Store
 .idea
-pipeline
+static/
 venv
 __pycache__
