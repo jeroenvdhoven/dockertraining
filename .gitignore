@@ -1,5 +1,5 @@
 .DS_Store
 .idea
-static/
+main/server/static/
 venv
 __pycache__
