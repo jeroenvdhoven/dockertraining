@@ -3,7 +3,7 @@ import os
 import joblib
 import pandas as pd
 from fastapi import FastAPI
-from typing import Dict, Iterable, List
+from typing import Dict, Iterable, List, Union, Any
 from pydantic import create_model, BaseModel
 
 from main import output_folders, model_file
@@ -35,18 +35,25 @@ class Item(BaseModel):
 
 
 class DataFrame(BaseModel):
-    data: Dict[str, Iterable]
+    data: Dict[str, Union[Dict[str, Any], Iterable[Any]]]
 
     def to_df(self):
         return pd.DataFrame(self.data)
 
 
+class Predictions(BaseModel):
+    predictions: Iterable[str]
+
+
 # Make an endpoint that accepts one variable `data` as input
 @app.post('/predict/')
 async def predict(data: DataFrame) -> str:
+    print(data.to_df())
     return str(pipeline.transform(data.to_df()))
 
 
 @app.post('/test/')
-async def predict(data: DataFrame) -> str:
-    return str(pipeline.transform(data.to_df()))
+async def predict(data: DataFrame) -> Predictions:
+    return {
+        "predictions": pipeline.transform(data.to_df())
+    }
