@@ -9,4 +9,4 @@ host=${host:-$default_host}
 echo $host
 
 export FLASK_APP=server.py
-cd main/server && flask run -h $host
+cd main/flask-server && flask run -h $host

@@ -4,14 +4,20 @@ import joblib
 import pandas as pd
 from flask import Flask
 
-from main import output_folder, model_file
+from main import output_folders, model_file
 
 # Start an application
 app = Flask(__name__)
 
 # Read the pipeline
-target_file = os.path.join(output_folder, model_file)
-if not os.path.isfile(target_file):
+model_file_detected = False
+for output_folder in output_folders:
+    target_file = os.path.join(output_folder, model_file)
+    if os.path.isfile(target_file):
+        model_file_detected = True
+        break
+
+if not model_file_detected:
     target_file = os.path.join("static", model_file)
 
 pipeline = joblib.load(target_file)

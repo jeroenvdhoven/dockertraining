@@ -7,7 +7,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OrdinalEncoder, FunctionTransformer
 
-from main import output_folder, model_file
+from main import output_folders, model_file
 from main.training.model_functions import call_model, reverse_labels
 
 if __name__ == "__main__":
@@ -51,5 +51,6 @@ if __name__ == "__main__":
     print(confusion_matrix(y, preds))
 
     # Save models
-    os.makedirs(output_folder, exist_ok=True)
-    dump(prediction_pipeline, os.path.join(output_folder, model_file))
+    for output_folder in output_folders:
+        os.makedirs(output_folder, exist_ok=True)
+        dump(prediction_pipeline, os.path.join(output_folder, model_file))

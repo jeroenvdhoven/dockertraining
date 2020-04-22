@@ -1,1 +1,1 @@
-python -m main.server.caller "$@"
+python -m main.flask-server.caller "$@"

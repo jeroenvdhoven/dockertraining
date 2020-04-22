@@ -1,2 +1,2 @@
-output_folder = "main/server/static"
+output_folders = ["main/flask-server/static", "main/fastapi-server/static"]
 model_file = "pipeline"

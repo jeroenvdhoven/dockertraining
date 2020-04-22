@@ -5,4 +5,4 @@
 # which means you will not be able to access it on the Docker image from outside.
 host=${host:-"127.0.0.1"}
 
-gunicorn main.server.server:app -b $host:5000
+gunicorn main.flask-server.server:app -b $host:5000
