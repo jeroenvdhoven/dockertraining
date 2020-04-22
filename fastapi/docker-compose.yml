@@ -1,0 +1,9 @@
+version: '3'
+services:
+  webserver:
+    ports:
+      - 8000:8000
+    build:
+      context: ..
+      dockerfile: fastapi/Dockerfile
+    image: fastapi-training:latest
