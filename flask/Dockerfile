@@ -6,7 +6,10 @@ COPY ./requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy all server and pipeline files
-COPY . .
+COPY ./main/flask-server/ ./main/flask-server/
+COPY ./main/__init__.py ./main/__init__.py
+COPY ./main/training/ ./main/training/
+COPY ./flask ./flask
 
 # Set Flask configuration
 ENV FLASK_APP=server.py host=0.0.0.0
