@@ -1,8 +1,10 @@
 FROM python:3.7-slim-buster
 WORKDIR server
 
+RUN pip install --no-cache-dir --upgrade pip
+
 # Setup python env
-COPY ./requirements.txt ./requirements.txt
+COPY ./flask/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy all server and pipeline files
